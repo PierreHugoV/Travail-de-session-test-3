@@ -211,3 +211,22 @@ titres_df.to_excel(output_excel_path, index=False)
 print(f"CSV file saved to: {output_csv_path}")
 print(f"Excel file saved to: {output_excel_path}")
 
+# Chemins des fichiers à combiner
+excel_files = [
+    '../../../Travail-de-session-test-3/data/final/portfolios_premier_client.xlsx',
+    '../../../Travail-de-session-test-3/data/final/produits_transformed.xlsx',
+    '../../../Travail-de-session-test-3/data/final/titres_tsx_sp_cleaned.xlsx',
+    '../../../Travail-de-session-test-3/data/final/clients_cleaned.xlsx',
+    '../../../Travail-de-session-test-3/data/final/conseillers_cleaned.xlsx'
+]
+
+# Créer un writer pandas Excel
+with pd.ExcelWriter('../../../Travail-de-session-test-3/data/final/output_combiné.xlsx', engine='openpyxl') as writer:
+    for file in excel_files:
+        df = pd.read_excel(file)
+        # Le nom de l'onglet est le nom du fichier sans extension
+        tab_name = file.split('/')[-1].replace('.xlsx', '')
+        df.to_excel(writer, sheet_name=tab_name, index=False)
+
+print("Les fichiers ont été combinés avec succès.")
+
