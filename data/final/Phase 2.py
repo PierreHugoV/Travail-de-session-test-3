@@ -18,6 +18,12 @@ conseillers_file_path = '../../../Travail-de-session-test-3/data/final/conseille
 # Chemin vers le fichier de données des portfolios
 chemin_fichier_portfolios = '../../../Travail-de-session-test-3/data/final/portfolios/portfolios.json'
 
+# Chemin vers le fichier de données des produits
+produits_json_path = '../../../Travail-de-session-test-3/data/final/produits/produits.json'
+
+# Chemin vers le fichier de données des titres
+titres_csv_path = '../../../Travail-de-session-test-3/data/final/titres/titres_tsx_sp.csv'
+
 # Fonction pour charger les données en fonction de l'extension du fichier
 def load_data(file_path):
     if file_path.endswith('.xlsx'):
@@ -91,6 +97,49 @@ for portefeuille in premier_client['packages']:
 # Convertir les données aplaties en DataFrame
 df_portfolios = pd.DataFrame(donnees_aplaties)
 
+# Charger les données JSON
+with open(produits_json_path, 'r', encoding='utf-8') as file:
+    produits_data = json.load(file)
+
+# Fonction pour transformer les données JSON en DataFrame structuré
+def transform_products_data(data):
+    structured_data = []
+    for product in data:
+        product_name = product['produit']
+        categories = product['content']
+        for category_name, category_info in categories.items():
+            category_weight = category_info['weight']
+            for stock in category_info['stocks']:
+                stock_symbol = stock[0]
+                stock_percentage = stock[1]
+                structured_data.append({
+                    "Produit": product_name,
+                    "Catégorie": category_name,
+                    "Poids de Catégorie (%)": category_weight,
+                    "Symbole Stock": stock_symbol,
+                    "Pourcentage Stock (%)": stock_percentage
+                })
+    return pd.DataFrame(structured_data)
+
+# Transformer les données JSON
+products_df = transform_products_data(produits_data)
+
+# Vérifier les valeurs manquantes
+if products_df.isnull().any().any():
+    products_df.fillna('N/A', inplace=True)
+
+# Charger le fichier CSV avec un séparateur de tabulation
+titres_df = pd.read_csv(titres_csv_path, sep='\t')
+
+# Nettoyer la colonne 'symbol' pour extraire uniquement le symbole de l'action
+titres_df['symbol'] = titres_df['symbol'].str.extract(r'q\?s=(\w+\.\w+)$')
+
+# Supprimer les espaces inutiles autour des noms de compagnies
+titres_df['cie'] = titres_df['cie'].str.strip()
+
+# Remplacer les valeurs manquantes par 'N/A'
+titres_df.fillna('N/A', inplace=True)
+
 
 # Assurez-vous que toutes les transformations sont appliquées aux clients
 def final_transformations_clients(df):
@@ -138,3 +187,27 @@ chemin_fichier_excel = '../../../Travail-de-session-test-3/data/final/portfolios
 df_portfolios.to_excel(chemin_fichier_excel, index=False)
 
 print(f"Le portfolio du premier client a été exporté avec succès vers {chemin_fichier_excel}")
+
+# Chemin pour sauvegarder le fichier Excel transformé
+output_excel_path = '../../../Travail-de-session-test-3/data/final/produits_transformed.xlsx'
+
+# Exporter le DataFrame en fichier Excel
+products_df.to_excel(output_excel_path, index=False)
+
+print(f"Le fichier Excel a été sauvegardé à : {output_excel_path}")
+
+# Chemin pour sauvegarder le fichier CSV nettoyé
+output_csv_path = '../../../Travail-de-session-test-3/data/final/titres_tsx_sp_cleaned.csv'
+
+# Exporter le DataFrame nettoyé en fichier CSV
+titres_df.to_csv(output_csv_path, index=False)
+
+# Chemin pour sauvegarder le fichier Excel
+output_excel_path = '../../../Travail-de-session-test-3/data/final/titres_tsx_sp_cleaned.xlsx'
+
+# Exporter le DataFrame nettoyé en fichier Excel
+titres_df.to_excel(output_excel_path, index=False)
+
+print(f"CSV file saved to: {output_csv_path}")
+print(f"Excel file saved to: {output_excel_path}")
+
