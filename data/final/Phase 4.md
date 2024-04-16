@@ -28,6 +28,8 @@ Le graphique suivant représente une situation possible de la répartition des c
 
 <img src="../../../Travail-de-session-test-3/data/final/graphique1.png" alt="Graphique 1" width="600" />
 
+(si l'image des différents graphiques ne s'ouvre pas sur GitHub, veillez ouvrir le code sur PyCharm et voir le fichier python phase 4 qui est en format markdown, et à partir de ce fichier vous pouvez visualier le tout correctement)
+
 ### Histogramme de la valeur totale du portefeuille d'investissement par conseiller financier en date d'aujourd'hui:
 Ce graphique permet d'analyser la performance des différents conseillers afin d’identifier les points forts et les points faibles de chacun, permettant d’identifier des pistes d’améliorations.
 
