@@ -24,8 +24,9 @@ Nous avons produit certains graphiques avec des données aléatoires puisqu’il
 
 ## Graphiques:
 ### Histogramme du nombre de clients par conseiller financier:
-Le graphique suivant représente une situation possible de la répartition des clients entre les trois conseillers financiers de la firme permettant un service client optimal.
-![Graphique 1](../../../Travail-de-session-test-3/data/final/graphique1.png)
+Le graphique suivant représente une situation possible de la répartition des clients entre les trois conseillers financiers de la firme permettant un service client optimal. 
+
+<img src="../../../Travail-de-session-test-3/data/final/graphique1.png" alt="Graphique 1" width="600" />
 
 ### Histogramme de la valeur totale du portefeuille d'investissement par conseiller financier en date d'aujourd'hui:
 Ce graphique permet d'analyser la performance des différents conseillers afin d’identifier les points forts et les points faibles de chacun, permettant d’identifier des pistes d’améliorations.
