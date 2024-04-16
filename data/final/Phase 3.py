@@ -9,7 +9,7 @@ excel_path = '../../../Travail-de-session-test-3/data/final/output_combiné.xlsx
 conseillers_df = pd.read_excel(excel_path, sheet_name='conseillers_cleaned')
 clients_df = pd.read_excel(excel_path, sheet_name='clients_cleaned')
 
-# Simuler le nombre de clients pour chaque conseiller (remplacez cette partie par vos vraies données si disponibles)
+# Simuler le nombre de clients pour chaque conseiller (remplacez cette partie par les vraies données une fois que celle-ci seront disponibles)
 np.random.seed(42)  # pour la reproductibilité
 conseillers_df['nombre_clients'] = np.random.randint(20, 100, size=len(conseillers_df))
 
@@ -21,7 +21,9 @@ plt.ylabel('Nombre de Clients')
 plt.title('Nombre de Clients par Conseiller')
 plt.xticks(rotation=45)  # Rotation des étiquettes pour une meilleure lisibilité
 plt.tight_layout()  # Ajuste automatiquement les sous-tracés pour donner un peu de padding entre les bords
+plt.savefig('graphique1.png')
 plt.show()
+
 
 
 #GRAPHIQUE 2
@@ -43,11 +45,10 @@ plt.title('Valeur Totale du Portefeuille par Conseiller Financier')
 plt.yticks(range(len(conseillers_df)), conseillers_df['prenom'])  # Utiliser le prénom du conseiller pour l'étiquette
 plt.grid(True)
 plt.tight_layout()
+plt.savefig('graphique2.png')
 plt.show()
 
-
 #GRAPHIQUE 3
-
 # Suppose que 'conseillers_df' est votre DataFrame contenant les informations des conseillers financiers
 # Générer des valeurs simulées séparément pour la valeur totale des portefeuilles des clients féminins et masculins pour chaque conseiller financier
 np.random.seed(42)
@@ -79,15 +80,10 @@ ax.bar_label(rects1, padding=3)
 ax.bar_label(rects2, padding=3)
 
 fig.tight_layout()
-
+plt.savefig('graphique3.png')
 plt.show()
 
-
-
-
-
-#GRAPHIQUE 4, AGE
-
+#GRAPHIQUE 4
 # Chargement de la feuille des clients
 df_clients = pd.read_excel(excel_path, sheet_name='clients_cleaned')
 
@@ -102,6 +98,7 @@ def plot_age_distribution():
     plt.xlabel('Âge')
     plt.ylabel('Nombre de Clients')
     plt.grid(True)  # Ajoute un grille pour une meilleure lisibilité
+    plt.savefig('graphique4.png')
     plt.show()
 
 # Appeler la fonction pour afficher l'histogramme
@@ -109,7 +106,6 @@ plot_age_distribution()
 
 
 #GRAPHIQUE 5
-
 # Chemin d'accès au fichier Excel combiné (assurez-vous que le chemin est correct)
 file_path = '../../../Travail-de-session-test-3/data/final/output_combiné.xlsx'
 
@@ -127,6 +123,7 @@ def plot_income_distribution():
     plt.xlabel('Revenu Annuel ($)')
     plt.ylabel('Nombre de Clients')
     plt.grid(True)  # Ajoute une grille pour une meilleure lisibilité
+    plt.savefig('graphique5.png')
     plt.show()
 
 # Appeler la fonction pour afficher l'histogramme
@@ -147,10 +144,10 @@ plt.title('Valeur Actuelle du Portefeuille par Rapport au Revenu des Clients')
 plt.xlabel('Revenu Annuel des Clients (en dollars)')
 plt.ylabel('Valeur Simulée Actuelle du Portefeuille (en dollars)')
 plt.grid(True)
+plt.savefig('graphique6.png')
 plt.show()
 
 #GRAPHIQUE 7
-
 # Supposons que titres_df est déjà chargé avec des informations sur les titres et les industries
 # Simuler des valeurs pour chaque titre
 # Chargement des données des titres
@@ -171,6 +168,7 @@ plt.ylabel('Valeur Totale (en dollars)')
 plt.xticks(rotation=45)
 plt.grid(True)
 plt.tight_layout()
+plt.savefig('graphique7.png')
 plt.show()
 
 #GRAPHIQUE 8
@@ -190,11 +188,10 @@ plt.xlabel('Valeur Totale du Portefeuille (en dollars)')
 plt.ylabel('Profession')
 plt.grid(True)
 plt.tight_layout()
+plt.savefig('graphique8.png')
 plt.show()
 
-
 #GRAPIQUE 9
-
 # Chargement des données des produits financiers
 produits_df = pd.read_excel(excel_path, sheet_name='produits_transformed')
 
@@ -211,10 +208,10 @@ plt.ylabel('Produit Financier')
 plt.xlabel('Nombre Estimé de Clients (proportionnel)')
 plt.grid(True)
 plt.tight_layout()
+plt.savefig('graphique9.png')
 plt.show()
 
 #GRAPHIQUE 10
-
 # Charger les données des titres et simuler la valeur de marché pour chaque titre
 titres_df = pd.read_excel(excel_path, sheet_name='titres_tsx_sp_cleaned')
 np.random.seed(42)
@@ -236,8 +233,8 @@ plt.ylabel('Pourcentage de la Valeur Totale Sous Gestion (%)')
 plt.xticks(rotation=45)
 plt.grid(True)
 plt.tight_layout()
+plt.savefig('graphique10.png')
 plt.show()
-
 
 #GRAPHIQUE 11
 # Chargement de la feuille des portefeuilles du premier client
@@ -262,6 +259,7 @@ def plot_top_titles():
     plt.ylabel('Nombre Total d\'Actions')
     plt.xticks(rotation=45)  # Rotation pour une meilleure lisibilité
     barplot.legend().set_visible(False)  # Cacher la légende si elle n'est pas nécessaire
+    plt.savefig('graphique11.png')
     plt.show()
 
 # Appeler la fonction pour afficher l'histogramme
